@@ -7,20 +7,23 @@ class HomeScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, ref) {
-    final provider = ref.watch(stockPriceProvider);
+
     return Scaffold(
       appBar: AppBar(title: Center(child: Text('StreamProvider'))),
       body: Center(
-        child: provider.when(
-          data: (price) {
-            return Text(
-              '$price',
-              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30),
-            );
-          },
-          error: (e, stack) => Text('Error'),
-          loading: () => CircularProgressIndicator(),
-        ),
+        child: Consumer(builder: ((context,ref,builder){
+          final provider = ref.watch(stockPriceProvider);
+          return provider.when(
+            data: (price) {
+              return Text(
+                '$price',
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30),
+              );
+            },
+            error: (e, stack) => Text('Error'),
+            loading: () => CircularProgressIndicator(),
+          );
+        })),
       ),
     );
   }
