@@ -8,6 +8,9 @@ class HomeScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context,ref) {
     final provider = ref.watch(stockPriceProvider);
-    return const Placeholder();
+    return Scaffold(
+      appBar: AppBar(title: Center(child: Text('StreamProvider')),),
+      body: Center(child: Text('$provider'),),
+    );
   }
 }
